@@ -21,11 +21,11 @@ app.get('/locations', function(res, res){
     if(fileError){
       return console.log(fileError);
     }
-    csvParse(data, {columns: ['location','lat','lon']}, function(parseError, output){
+    csvParse(data, {columns: ['name','lat','lon']}, function(parseError, output){
       if(parseError){
         return console.log(parseError);
       }
-      res.send(output);
+      res.send(JSON.stringify(output));
     })
   })
 })

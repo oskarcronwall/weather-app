@@ -9,8 +9,7 @@ angular.module('weatherApp.weather')
 			data.timeseries.forEach(function(obj){
 				var dateString = obj.validTime.slice(0, 10);
 				if(!dates[dateString]){
-					var date = new Date(dateString);
-					var label = date.toLocaleDateString('sv-SE', {weekday:'long'});
+					var label = weekDayInSwedish(dateString);
 					dates[dateString] = {label: label, data:[obj]};
 				}
 				else{
@@ -21,6 +20,12 @@ angular.module('weatherApp.weather')
 			return data;
 		})
 	}
+
+	function weekDayInSwedish(date){
+		var dateObj = new Date(date);
+		return dateObj.toLocaleDateString('sv-SE', {weekday:'long'});
+	}
+
 	return {
 			getWeatherReport:getWeatherReport
 		}

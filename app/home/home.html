@@ -3,25 +3,24 @@
 		<div class="col-md-6">
 			<input type="text" ng-model="selected" placeholder="Välj ort" uib-typeahead="location as location.name for location in locations | filter:$viewValue | limitTo:8" typeahead-on-select="selectLocation($item,$label)" class="form-control">
 			<h1>{{locationName}}</h1>
-			<div class="weather-report" ng-repeat="(k, v) in weatherReport.dates">
-				<div class="weather-day">
-					<span>{{v.label}}</span>
-				</div>
-				<div class="weather-temp">
-					<span>Temperatur:</span>
-					<span>Max: {{v.tempMax}}</span>
-					<span>Min: {{v.tempMin}}</span>
-				</div>
-				<div class="weather-windspeed">
-					<span>Vindhastighet: {{v.windSpeedAverage}}</span>
-				</div>
-				<div class="weather-winddirection">
-					<span>Vindriktning</span>
-				</div>
-				<div class="weather-airpressure">
-					<span>Lufttryck: {{v.airPressureAverage}}</span>
-				</div>
-			</div>
+			<table class="table" ng-show="locationName">
+				<thead>
+					<tr>
+						<th>DAG</th>
+						<th>TEMPERATUR</th>
+						<th>VIND</th>
+						<th>LUFTTRYCK</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="(k, v) in weatherReport.dates">
+					<td>{{v.label}}<br>{{k}}</td>
+					<td>{{v.tempMax}}&deg;C<br>{{v.tempMin}}&deg;C</td>
+					<td>{{v.windSpeedAverage}} m/s</td>
+					<td>{{v.airPressureAverage}} hPa</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
 		<div class="col-md-6">
 			<openlayers ol-center="center" height="800px" width="100%"></openlayers>

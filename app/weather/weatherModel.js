@@ -20,11 +20,11 @@ angular.module('weatherApp.weather')
 			})
 			
 			for (var date in dates){
-				dates[date]['tempMax'] = maxValue('t', dates[date]['data']);
-				dates[date]['tempMin'] = minValue('t', dates[date]['data']);
-				dates[date]['windSpeedMedian'] = median('ws', dates[date]['data']);
-				dates[date]['windSpeedAverage'] = average('ws', dates[date]['data']);
-				dates[date]['airPressureAverage'] = average('msl', dates[date]['data']);
+				dates[date]['tempMax'] = maxValue('t', dates[date]['data']).toFixed(1);
+				dates[date]['tempMin'] = minValue('t', dates[date]['data']).toFixed(1);
+				dates[date]['windSpeedMedian'] = median('ws', dates[date]['data']).toFixed(1);
+				dates[date]['windSpeedAverage'] = average('ws', dates[date]['data']).toFixed(1);
+				dates[date]['airPressureAverage'] = average('msl', dates[date]['data']).toFixed(1);
 			}
 
 			data['dates'] = dates;

@@ -1,16 +1,14 @@
 angular.module('weatherApp.home')
 
-.controller('HomeCtrl', ['$scope', 'locationResource', 'weatherModel', function($scope, locationResource, weatherModel){
+.controller('HomeCtrl', ['$scope', 'locationResource', 'weatherModel', 'mapModel', function($scope, locationResource, weatherModel, mapModel){
 	$scope.selected = undefined;
 	$scope.weatherReport = undefined;
 	$scope.locations = locationResource.query();
+	$scope.center = mapModel.init();
 
 	$scope.selectLocation = function($item, $label){
 		$scope.locationName = $label;
 		$scope.weatherReport = weatherModel.getWeatherReport($item)
+		$scope.center = mapModel.center($item);
 	}
-	$scope.center = {
-		lat: 59.33,
-        lon: 18.11,
-        zoom: 5} 
 }])

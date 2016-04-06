@@ -5,7 +5,8 @@ angular.module('weatherApp',[
 	'openlayers-directive',
 	'weatherApp.home',
 	'weatherApp.location',
-	'weatherApp.weather'])
+	'weatherApp.weather',
+	'weatherApp.map'])
 
 .config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider){
 	$routeProvider.otherwise({redirectTo: '/'});

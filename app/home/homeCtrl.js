@@ -8,4 +8,8 @@ angular.module('weatherApp.home')
 		var location = $item;
 		$scope.weatherReport = weatherModel.getWeatherReport(location)
 	}
+	$scope.center = {
+		lat: 59.33,
+        lon: 18.11,
+        zoom: 5} 
 }])

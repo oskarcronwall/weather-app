@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+.map{
+	height:300px;
+	width:100%;
+}
+@media (min-width:768px){
+	.map{
+		height:500px;
+	}
+}
+@media (min-width:992px){
+	.map{
+		height:800px;
+	}
+}
+

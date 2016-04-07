@@ -6,6 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+.table-hover>tbody>tr:hover{
+	background-color: #d9edf7;
+}
 .map{
 	height:300px;
 	width:100%;

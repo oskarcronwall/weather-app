@@ -1,6 +1,10 @@
 angular.module('weatherApp.home')
 
-.controller('HomeCtrl', ['$scope', 'locationResource', 'weatherModel', 'mapModel', function($scope, locationResource, weatherModel, mapModel){
+.controller('HomeCtrl', [
+	'$scope',
+	'locationResource',
+	'weatherModel',
+	'mapModel', function($scope, locationResource, weatherModel, mapModel){
 	$scope.selected = undefined;
 	$scope.weatherReport = undefined;
 	$scope.locations = locationResource.query();

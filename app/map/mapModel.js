@@ -7,6 +7,7 @@ angular.module('weatherApp.map')
         	zoom: 5
         }
     }
+    
     var center = function(coords){
      	return {
      		lat: Number(coords.lat),

@@ -6,7 +6,3 @@ angular.module('weatherApp.home',[])
 		controller: 'HomeCtrl'
 	})
 }])
-/*
-.controller('HomeCtrl', [function(){
-
-}])*/

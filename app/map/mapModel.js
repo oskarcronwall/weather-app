@@ -11,7 +11,7 @@ angular.module('weatherApp.map')
      	return {
      		lat: Number(coords.lat),
      		lon: Number(coords.lon),
-     		zoom:8
+     		zoom:11
      	}
     }
 

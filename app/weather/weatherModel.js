@@ -20,11 +20,14 @@ angular.module('weatherApp.weather')
 			})
 			
 			for (var date in dates){
-				dates[date]['tempMax'] = maxValue('t', dates[date]['data']).toFixed(1);
-				dates[date]['tempMin'] = minValue('t', dates[date]['data']).toFixed(1);
-				dates[date]['windSpeedMedian'] = median('ws', dates[date]['data']).toFixed(1);
-				dates[date]['windSpeedAverage'] = average('ws', dates[date]['data']).toFixed(1);
-				dates[date]['airPressureAverage'] = average('msl', dates[date]['data']).toFixed(1);
+				dates[date]['tempMax'] = max(filterByKey('t', dates[date]['data'])).toFixed(0);
+				dates[date]['tempMin'] = min(filterByKey('t', dates[date]['data'])).toFixed(0);
+				dates[date]['windSpeedMedian'] = median(filterByKey('ws', dates[date]['data'])).toFixed(1);
+				dates[date]['windSpeedAverage'] = average(filterByKey('ws', dates[date]['data'])).toFixed(1);
+				dates[date]['airPressureAverage'] = average(filterByKey('msl', dates[date]['data'])).toFixed(1);
+				dates[date]['windDirectionAverage'] = direction(
+					filterByKey('ws',dates[date]['data']),
+					filterByKey('wd',dates[date]['data'])).toFixed(0);
 			}
 
 			data['dates'] = dates;
@@ -33,36 +36,63 @@ angular.module('weatherApp.weather')
 		})
 	};
 
-	function weekDayInSwedish(date){
-		var dateObj = new Date(date);
-		return dateObj.toLocaleDateString('sv-SE', {weekday:'long'});
-	};
-	function filterOnKey(key, arr){
-		return arr.map(function(obj){
+	function filterByKey(key, a){
+		return a.map(function(obj){
 			return obj[key];
 		});
 	};
-	function maxValue(key, arr){
-		var f = filterOnKey(key, arr);
-		return Math.max(...f);
+
+	function deg2rad(deg){
+		return (deg * Math.PI) / 180;
+	}
+
+	function rad2deg(rad){
+		return (rad * 180) / Math.PI;
+	}
+
+	function direction(speed, direction){
+		var x = [];
+		var y = [];
+		direction.forEach(function(element, index){
+			var rad = deg2rad(element)
+			x.push(Math.cos(rad)*speed[index]);
+			y.push(Math.sin(rad)*speed[index]);
+		});
+
+		var avgX = average(x);
+		var avgY = average(y);
+
+		var result = rad2deg(Math.atan2(avgY, avgX));
+		if (result < 0){
+			return result += 360;
+		}
+		else{
+			return result;
+		}
+	}
+
+	function weekDayInSwedish(date){
+		var dateObj = new Date(date);
+		return dateObj.toLocaleDateString('sv-SE', {weekday: 'long'});
 	};
 
-	function minValue(key,arr){
-		var f = filterOnKey(key, arr)
-		return Math.min(...f);
+	function max(a){
+		return Math.max(...a);
 	};
 
-	function average(key, arr){
-		var f = filterOnKey(key, arr);
-		var sum = f.reduce(function(a, b){
+	function min(a){
+		return Math.min(...a);
+	};
+
+	function average(arr){
+		var sum = arr.reduce(function(a, b){
 			return a + b;
-		})
+		});
 		return sum / arr.length;
-	};
+	}
 
-	function median(key, arr){
-		var f = filterOnKey(key, arr);
-		var m = f.sort(function(a, b) {
+	function median(arr){
+		var m = arr.sort(function(a, b) {
 	        return a - b;
 	    });
 

@@ -5,8 +5,12 @@
 			<div class="alert alert-warning" ng-show="noResults">
 				Försök med en annan ort
 			</div>
-			<h1>{{locationName}}</h1>
-			<table class="table table-striped table-hover" ng-show="locationName">
+				<h1 class=location>{{location.name}}</h1>
+				<div ng-show="location.name">
+					<h6 class="lat inline">{{location.lat}}&deg</h6>
+					<h6 class="lon inline">{{location.lon}}&deg</h6>
+				</div>
+			<table class="table table-striped table-hover" ng-show="location.name">
 				<thead>
 					<tr>
 						<th>DAG</th>

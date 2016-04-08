@@ -16,7 +16,11 @@ angular.module('weatherApp.home')
 	})
 
 	$scope.selectLocation = function($item, $label){
-		$scope.locationName = $label;
+		$scope.location ={
+			name:$label,
+			lat:$item.lat,
+			lon:$item.lon
+		}
 		$scope.weatherReport = weatherModel.getWeatherReport($item)
 		$scope.center = mapModel.center($item);
 	}
